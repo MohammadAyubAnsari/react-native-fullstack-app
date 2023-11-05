@@ -1,11 +1,32 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import InputBox from "../../components/Forms/InputBox";
+import SubmitButton from "../../components/Forms/SubmitButton";
 
 const Register = () => {
+  // states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  //   functions as below
+  //   handle button function
+  const handleSubmit = () => {
+    try {
+      setLoading(true);
+      if (!name || !email || !password) {
+        setLoading(false);
+        return Alert.alert("Please enter all details");
+      }
+      setLoading(false);
+      console.log("Register Data ==>", { name, email, password });
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.pageTitle}>Register</Text>
@@ -33,7 +54,12 @@ const Register = () => {
           setValue={setPassword}
         />
       </View>
-      <Text>{JSON.stringify({ name, email, password }, null, 4)}</Text>
+      {/* <Text>{JSON.stringify({ name, email, password }, null, 4)}</Text> */}
+      <SubmitButton
+        btnTitle="Register"
+        loading={loading}
+        handleSubmit={handleSubmit}
+      />
     </View>
   );
 };
