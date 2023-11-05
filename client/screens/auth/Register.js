@@ -1,18 +1,39 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import InputBox from "../../components/Forms/InputBox";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View style={styles.container}>
       <Text style={styles.pageTitle}>Register</Text>
       <View style={{ marginHorizontal: 20 }}>
-        <Text>NAME</Text>
-        <TextInput style={styles.inputBox} placeholder="Enter your name" />
-        <Text>EMAIL</Text>
-        <TextInput style={styles.inputBox} placeholder="Enter your email" />
-        <Text>PASSWORD</Text>
-        <TextInput style={styles.inputBox} placeholder="Assign a password" />
+        <InputBox
+          inputTitle={"Name"}
+          placeholder={"Enter your name"}
+          value={name}
+          setValue={setName}
+        />
+        <InputBox
+          inputTitle={"Email"}
+          placeholder={"Enter your email"}
+          keyboardType="email-address"
+          autoComplete="email"
+          value={email}
+          setValue={setEmail}
+        />
+        <InputBox
+          inputTitle={"Password"}
+          placeholder={"Assign a password"}
+          secureTextEntry={true}
+          autoComplete="password"
+          value={password}
+          setValue={setPassword}
+        />
       </View>
+      <Text>{JSON.stringify({ name, email, password }, null, 4)}</Text>
     </View>
   );
 };
