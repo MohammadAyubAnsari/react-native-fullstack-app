@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import InputBox from "../../components/Forms/InputBox";
 import SubmitButton from "../../components/Forms/SubmitButton";
 
-const Register = () => {
+const Login = () => {
   // states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,12 +15,12 @@ const Register = () => {
   const handleSubmit = () => {
     try {
       setLoading(true);
-      if (!name || !email || !password) {
+      if (!email || !password) {
         setLoading(false);
         return Alert.alert("Please enter all details");
       }
       setLoading(false);
-      console.log("Register Data ==>", { name, email, password });
+      console.log("Login Data ==>", { name, email, password });
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -29,14 +29,8 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>Register</Text>
+      <Text style={styles.pageTitle}>Log In</Text>
       <View style={{ marginHorizontal: 20 }}>
-        <InputBox
-          inputTitle={"Name"}
-          placeholder={"Enter your name"}
-          value={name}
-          setValue={setName}
-        />
         <InputBox
           inputTitle={"Email"}
           placeholder={"Enter your email"}
@@ -47,7 +41,7 @@ const Register = () => {
         />
         <InputBox
           inputTitle={"Password"}
-          placeholder={"Assign a password"}
+          placeholder={"Enter password"}
           secureTextEntry={true}
           autoComplete="password"
           value={password}
@@ -56,18 +50,18 @@ const Register = () => {
       </View>
       {/* <Text>{JSON.stringify({ name, email, password }, null, 4)}</Text> */}
       <SubmitButton
-        btnTitle="Register"
+        btnTitle="Login"
         loading={loading}
         handleSubmit={handleSubmit}
       />
       <Text style={styles.linkText}>
-        Already registered? Please <Text style={styles.link}>Login</Text>
+        Create Account? Please <Text style={styles.link}>Register</Text>
       </Text>
     </View>
   );
 };
 
-export default Register;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
