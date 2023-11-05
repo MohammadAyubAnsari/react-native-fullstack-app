@@ -3,9 +3,13 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
+const connectMongoDB = require("./config/db");
 
 // DOTENV
 dotenv.config();
+
+// MongoDB Connection
+connectMongoDB();
 
 // REST object
 const app = express();
