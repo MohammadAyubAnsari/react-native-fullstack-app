@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import InputBox from "../../components/Forms/InputBox";
 import SubmitButton from "../../components/Forms/SubmitButton";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   // states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -55,7 +55,13 @@ const Login = () => {
         handleSubmit={handleSubmit}
       />
       <Text style={styles.linkText}>
-        Create Account? Please <Text style={styles.link}>Register</Text>
+        Create Account? Please{" "}
+        <Text
+          style={styles.link}
+          onPress={() => navigation.navigate("Register")}
+        >
+          Register
+        </Text>
       </Text>
     </View>
   );
