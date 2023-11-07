@@ -74,7 +74,7 @@ const loginController = async (req, res) => {
     // match password
     const match = await comparePassword(password, user.password);
     if (!match) {
-      return res.staus(500).send({
+      return res.status(500).send({
         success: false,
         message: "Invalid username or password",
       });
@@ -91,12 +91,12 @@ const loginController = async (req, res) => {
       user,
       token,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     return res.status(500).send({
       success: false,
       message: "Error in Login API",
-      err,
+      error,
     });
   }
 };
