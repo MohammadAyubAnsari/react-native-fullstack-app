@@ -22,10 +22,12 @@ const Register = ({ navigation }) => {
       }
       setLoading(false);
       const { data } = await axios.post(
-        "http://192.168.29.90:5100/api/v1/auth/register",
+        // "http://192.168.29.90:5100/api/v1/auth/register",
+        "/auth/register",
         { name, email, password }
       );
       alert(data && data.message);
+      navigation.navigate("Login");
       console.log("Register Data ==>", {
         name,
         email,
