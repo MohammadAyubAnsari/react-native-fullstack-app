@@ -7,9 +7,9 @@ const Account = () => {
   const [state] = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Text>NAME: {state.user.name}</Text>
-      <Text>EMAIL: {state.user.email}</Text>
-      <Text>ROLE: {state.user.role}</Text>
+      <Text>NAME: {state?.user.name}</Text>
+      <Text>EMAIL: {state?.user.email}</Text>
+      <Text>ROLE: {state?.user.role}</Text>
       <FooterMenu />
     </View>
   );
