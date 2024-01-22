@@ -13,10 +13,13 @@ const PostCard = ({ posts }) => {
           <Text style={styles.title}>Title: {post?.title}</Text>
           <Text style={styles.desc}>{post?.description}</Text>
           <View style={styles.footer}>
-            <Text>
-              <FontAwesome5Icon name="user" color={"orange"} />{" "}
-              {post?.postedBy?.name}
-            </Text>
+            {post?.postedBy?.name && (
+              <Text>
+                <FontAwesome5Icon name="user" color={"orange"} />{" "}
+                {post?.postedBy?.name}
+              </Text>
+            )}
+
             <Text>
               <FontAwesome5Icon name="clock" color={"orange"} />
               {"  "}
