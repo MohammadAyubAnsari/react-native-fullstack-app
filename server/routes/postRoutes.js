@@ -4,6 +4,7 @@ const {
   createPostController,
   getAllPostsController,
   getUserPostsController,
+  deletePostController,
 } = require("../controllers/postControllers");
 
 // router object
@@ -17,6 +18,9 @@ router.get("/get-all-post", getAllPostsController);
 
 // Get User Posts
 router.get("/get-user-post", requireSignIn, getUserPostsController);
+
+// Delete Post
+router.delete("/delete-post/:id", requireSignIn, deletePostController);
 
 // export
 module.exports = router;
