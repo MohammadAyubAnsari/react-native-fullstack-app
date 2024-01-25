@@ -4,9 +4,14 @@ import { StyleSheet } from "react-native";
 import moment from "moment/moment";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import axios from "axios";
+import EditModal from "./EditModal";
+import { useNavigation } from "@react-navigation/native";
 
 const PostCard = ({ posts, myPostScreen }) => {
   const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [post, setPost] = useState({});
+  const navigation = useNavigation();
   // handle prompt
   const handleDeletePrompt = (id) => {
     Alert.alert("Attention!", "Are you sure , want to delete post?", [
@@ -40,10 +45,27 @@ const PostCard = ({ posts, myPostScreen }) => {
   return (
     <View>
       <Text style={styles.heading}>Total Posts: {posts?.length}</Text>
+      {myPostScreen && (
+        <EditModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          post={post}
+        />
+      )}
       {posts?.map((post, i) => (
         <View style={styles.card} key={i}>
           {myPostScreen && (
-            <View>
+            <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+              <Text style={{ marginHorizontal: 40 }}>
+                <FontAwesome5Icon
+                  name="pen"
+                  size={16}
+                  color={"darkblue"}
+                  onPress={() => {
+                    setPost(post), setModalVisible(true);
+                  }}
+                />{" "}
+              </Text>
               <Text style={{ textAlign: "right" }}>
                 <FontAwesome5Icon
                   name="trash"
