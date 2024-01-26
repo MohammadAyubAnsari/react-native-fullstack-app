@@ -92,9 +92,46 @@ const deletePostController = async (req, res) => {
   }
 };
 
+// Update Post
+const updatePostController = async (req, res) => {
+  try {
+    const { title, description } = req.body;
+    // post find
+    const post = await postModel.findById({ _id: req.params.id });
+    // validatiion
+    if (!title || !description) {
+      return res.status(500).send({
+        success: false,
+        message: "Please provide post title or description",
+      });
+    }
+    const updatedPost = await postModel.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        title: title || post?.title,
+        description: description || post?.description,
+      },
+      { new: true }
+    );
+    res.status(200).send({
+      success: true,
+      message: "Post updated successfully",
+      updatedPost,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      message: "Error in update post api",
+      err,
+    });
+  }
+};
+
 module.exports = {
   createPostController,
   getAllPostsController,
   getUserPostsController,
   deletePostController,
+  updatePostController,
 };
